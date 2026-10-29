@@ -1,0 +1,1 @@
+Create a rectangular mounting plate 40 mm wide, 30 mm deep, and 4 mm thick. Add four 3 mm diameter through-holes, with each hole center 5 mm from its two nearest edges. Export the finished part as STEP and STL.
