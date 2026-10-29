@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HyperFrames Repository Intro</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f4f1e8;
+        --muted: #a8a69f;
+        --lime: #d8ff5f;
+        --cyan: #65e5ff;
+        --orange: #ff8a4c;
+        --panel: #161916;
+        --line: rgba(244, 241, 232, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #0b0d0c;
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      #stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 82% 18%, rgba(101, 229, 255, 0.1), transparent 28%),
+          radial-gradient(circle at 12% 90%, rgba(216, 255, 95, 0.08), transparent 34%),
+          #0b0d0c;
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 64px 64px;
+        opacity: 0.2;
+      }
+
+      .topline {
+        position: absolute;
+        top: 30px;
+        left: 42px;
+        right: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .topline strong {
+        color: var(--lime);
+        font-weight: 700;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .scene-content {
+        position: absolute;
+        inset: 0;
+        padding: 112px 64px 54px;
+      }
+
+      .flow-content,
+      .export-content {
+        opacity: 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--lime);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 34px;
+        height: 2px;
+        background: currentColor;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 920px;
+        margin-top: 24px;
+        font-size: 104px;
+        font-weight: 800;
+        letter-spacing: -0.07em;
+        line-height: 0.88;
+        text-transform: uppercase;
+      }
+
+      h1 .accent {
+        color: var(--lime);
+      }
+
+      .lede {
+        max-width: 640px;
+        margin-top: 30px;
+        color: var(--muted);
+        font-size: 26px;
+        line-height: 1.35;
+      }
+
+      .code-card {
+        position: absolute;
+        right: 64px;
+        bottom: 54px;
+        width: 430px;
+        padding: 22px;
+        border: 1px solid rgba(216, 255, 95, 0.4);
+        background: rgba(22, 25, 22, 0.92);
+        box-shadow: 14px 14px 0 rgba(216, 255, 95, 0.1);
+        font-family: Consolas, "Courier New", monospace;
+      }
+
+      .code-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .code-line {
+        display: flex;
+        gap: 12px;
+        margin: 10px 0;
+        font-size: 17px;
+        white-space: nowrap;
+      }
+
+      .line-number {
+        width: 20px;
+        color: #989d98;
+      }
+
+      .token-tag {
+        color: var(--orange);
+      }
+
+      .token-attr {
+        color: var(--cyan);
+      }
+
+      .token-value {
+        color: var(--lime);
+      }
+
+      .flow-layout {
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        gap: 56px;
+        align-items: center;
+        height: 100%;
+      }
+
+      .scene-title {
+        margin-top: 18px;
+        font-size: 70px;
+        font-weight: 800;
+        letter-spacing: -0.055em;
+        line-height: 0.96;
+        text-transform: uppercase;
+      }
+
+      .scene-copy {
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 22px;
+        line-height: 1.4;
+      }
+
+      .engine {
+        position: relative;
+        height: 390px;
+        border: 1px solid rgba(101, 229, 255, 0.42);
+        background: rgba(13, 17, 16, 0.94);
+        box-shadow: 18px 18px 0 rgba(101, 229, 255, 0.08);
+      }
+
+      .engine-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 58px;
+        padding: 0 22px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+      }
+
+      .status-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--lime);
+        box-shadow: 0 0 18px rgba(216, 255, 95, 0.7);
+      }
+
+      .viewport {
+        position: absolute;
+        top: 86px;
+        left: 28px;
+        right: 28px;
+        height: 190px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(135deg, rgba(216, 255, 95, 0.08), transparent 46%),
+          #111411;
+      }
+
+      .viewport-mark {
+        color: var(--ink);
+        font-size: 50px;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+      }
+
+      .viewport-mark span {
+        color: var(--cyan);
+      }
+
+      .timeline {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 34px;
+        height: 54px;
+      }
+
+      .timeline-track {
+        position: absolute;
+        top: 24px;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: #252a26;
+      }
+
+      .timeline-fill {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--lime), var(--cyan));
+        transform-origin: left center;
+      }
+
+      .playhead {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 2px;
+        height: 48px;
+        background: var(--orange);
+        box-shadow: 0 0 14px rgba(255, 138, 76, 0.65);
+      }
+
+      .ticks {
+        display: flex;
+        justify-content: space-between;
+        color: #989d98;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 11px;
+      }
+
+      .export-layout {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 64px;
+        align-items: center;
+        height: 100%;
+      }
+
+      .export-panel {
+        padding: 34px;
+        border: 1px solid rgba(255, 138, 76, 0.44);
+        background: rgba(22, 25, 22, 0.9);
+        box-shadow: 18px 18px 0 rgba(255, 138, 76, 0.08);
+      }
+
+      .file-icon {
+        position: relative;
+        width: 150px;
+        height: 182px;
+        margin: 0 auto 28px;
+        display: grid;
+        place-items: center;
+        border: 2px solid var(--ink);
+        color: var(--orange);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .file-icon::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 36px;
+        height: 36px;
+        border-left: 2px solid var(--ink);
+        border-bottom: 2px solid var(--ink);
+        background: #0b0d0c;
+      }
+
+      .progress {
+        height: 10px;
+        overflow: hidden;
+        background: #292d2a;
+      }
+
+      .progress-fill {
+        width: 100%;
+        height: 100%;
+        background: var(--orange);
+        transform-origin: left center;
+      }
+
+      .export-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 14px;
+        color: var(--muted);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .badge-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .badge {
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .footer-code {
+        position: absolute;
+        left: 64px;
+        bottom: 42px;
+        color: #a8ada8;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="stage"
+      data-composition-id="hyperframes-repo-intro"
+      data-start="0"
+      data-width="1280"
+      data-height="720"
+      data-duration="8"
+      data-fps="30"
+    >
+      <div class="grid" aria-hidden="true"></div>
+      <div class="topline">
+        <span><strong>03</strong> / Github lab</span>
+        <span>heygen-com / hyperframes</span>
+      </div>
+
+      <section id="scene-source" class="scene">
+        <div class="scene-content intro-content">
+          <div class="intro-copy">
+            <div class="eyebrow">Open-source video framework</div>
+            <h1>Write <span class="accent">HTML.</span><br />Render motion.</h1>
+            <p class="lede">A browser-native canvas where web code becomes deterministic video.</p>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header"><span>index.html</span><span>8.0 sec</span></div>
+            <div class="code-line"><span class="line-number">1</span><span><span class="token-tag">&lt;div</span> <span class="token-attr">data-duration</span>=<span class="token-value">"8"</span><span class="token-tag">&gt;</span></span></div>
+            <div class="code-line"><span class="line-number">2</span><span>&nbsp;&nbsp;<span class="token-tag">&lt;section</span> <span class="token-attr">class</span>=<span class="token-value">"clip"</span><span class="token-tag">&gt;</span></span></div>
+            <div class="code-line"><span class="line-number">3</span><span>&nbsp;&nbsp;&nbsp;&nbsp;seekable motion</span></div>
+            <div class="code-line"><span class="line-number">4</span><span>&nbsp;&nbsp;<span class="token-tag">&lt;/section&gt;</span></span></div>
+            <div class="code-line"><span class="line-number">5</span><span><span class="token-tag">&lt;/div&gt;</span></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-timeline" class="scene">
+        <div class="scene-content flow-content">
+          <div class="flow-layout">
+            <div class="flow-copy">
+              <div class="eyebrow">Frame accurate</div>
+              <h2 class="scene-title">Seek.<br />Style.<br />Ship.</h2>
+              <p class="scene-copy">GSAP motion is paused, indexed, and driven one frame at a time.</p>
+            </div>
+
+            <div class="engine">
+              <div class="engine-bar">
+                <span>Composition / hyperframes-repo-intro</span>
+                <span class="status-dot"></span>
+              </div>
+              <div class="viewport">
+                <div class="viewport-mark">HTML <span>to</span> frames</div>
+              </div>
+              <div class="timeline">
+                <div class="ticks"><span>00:00</span><span>00:02</span><span>00:04</span><span>00:06</span><span>00:08</span></div>
+                <div class="timeline-track"><div class="timeline-fill"></div></div>
+                <div class="playhead"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-export" class="scene">
+        <div class="scene-content export-content">
+          <div class="export-layout">
+            <div class="export-copy">
+              <div class="eyebrow">Local render</div>
+              <h2 class="scene-title">Web craft.<br />Video output.</h2>
+              <p class="scene-copy">Open source, editable, and rendered on your machine.</p>
+              <div class="badge-row">
+                <span class="badge">Apache-2.0</span>
+                <span class="badge">HTML + CSS + GSAP</span>
+                <span class="badge">MP4</span>
+              </div>
+            </div>
+
+            <div class="export-panel">
+              <div class="file-icon">MP4</div>
+              <div class="progress"><div class="progress-fill"></div></div>
+              <div class="export-meta"><span>Rendering locally</span><span class="percent">100%</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-code">npx hyperframes render -o intro.mp4</div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(
+        ".intro-copy",
+        { opacity: 0, x: -70 },
+        { opacity: 1, x: 0, duration: 0.65, ease: "power3.out" },
+        0.15,
+      );
+      tl.fromTo(
+        ".code-card",
+        { opacity: 0, x: 90 },
+        { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+        0.38,
+      );
+      tl.fromTo(
+        ".code-line",
+        { opacity: 0, x: 18 },
+        { opacity: 1, x: 0, duration: 0.28, stagger: 0.1, ease: "power2.out" },
+        0.82,
+      );
+      tl.to(".code-card", { y: -8, duration: 0.8, ease: "sine.inOut" }, 1.35);
+      tl.to(".intro-content", { opacity: 0, duration: 0.24, ease: "power2.in" }, 2.16);
+
+      tl.fromTo(
+        ".flow-content",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.16, ease: "none" },
+        2.4,
+      );
+      tl.fromTo(
+        ".flow-copy",
+        { opacity: 0, x: -54 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" },
+        2.52,
+      );
+      tl.fromTo(
+        ".engine",
+        { opacity: 0, scale: 0.94 },
+        { opacity: 1, scale: 1, duration: 0.68, ease: "power3.out" },
+        2.65,
+      );
+      tl.fromTo(
+        ".timeline-fill",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.85, ease: "none" },
+        3.0,
+      );
+      tl.fromTo(
+        ".playhead",
+        { x: 0 },
+        { x: 735, duration: 1.85, ease: "none" },
+        3.0,
+      );
+      tl.fromTo(
+        ".viewport-mark",
+        { opacity: 0.35, scale: 0.94 },
+        { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
+        3.25,
+      );
+      tl.to(".flow-content", { opacity: 0, duration: 0.24, ease: "power2.in" }, 4.96);
+
+      tl.fromTo(
+        ".export-content",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.16, ease: "none" },
+        5.2,
+      );
+      tl.fromTo(
+        ".export-copy",
+        { opacity: 0, x: -60 },
+        { opacity: 1, x: 0, duration: 0.65, ease: "power3.out" },
+        5.34,
+      );
+      tl.fromTo(
+        ".export-panel",
+        { opacity: 0, x: 72 },
+        { opacity: 1, x: 0, duration: 0.65, ease: "power3.out" },
+        5.48,
+      );
+      tl.fromTo(
+        ".file-icon",
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.52, ease: "back.out(1.4)" },
+        5.9,
+      );
+      tl.fromTo(
+        ".progress-fill",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.25, ease: "power1.inOut" },
+        6.18,
+      );
+      tl.fromTo(
+        ".badge",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" },
+        6.28,
+      );
+      tl.to(".file-icon", { y: -6, duration: 0.5, ease: "sine.inOut" }, 7.35);
+      tl.set({}, {}, 8);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["hyperframes-repo-intro"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
