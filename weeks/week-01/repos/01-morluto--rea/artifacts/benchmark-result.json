@@ -1,0 +1,92 @@
+{
+  "fixture": {
+    "source": "project/Program.cs",
+    "assemblyBytes": 5120,
+    "assemblySha256": "5dc998a5ffaaf36696477649fca1379f6f8a648bc15dcf93a9e952b190588acc",
+    "observedOutput": "REA_LAB_MARKER:analysis-ready:22",
+    "exitCode": 0
+  },
+  "baseline": {
+    "analyzer": "authored-byte-scan-baseline",
+    "elapsedMs": 4.658,
+    "typesDetected": "2/2",
+    "methodsDetected": "3/3",
+    "markerDetected": true,
+    "assemblyIdentityRecovered": false,
+    "cilRecovered": false,
+    "callEdgesRecovered": false,
+    "qualityScore": "6/9",
+    "errors": 0
+  },
+  "treatment": {
+    "analyzer": "REA managed static analysis provider",
+    "artifactElapsedMs": 15877.9136,
+    "membersElapsedMs": 7862.1063,
+    "typesDetected": "2/2",
+    "methodsDetected": "3/3",
+    "markerDetected": true,
+    "assemblyIdentityRecovered": true,
+    "assembly": "ReaLab",
+    "targetFrameworks": [
+      ".NETCoreApp,Version=v5.0"
+    ],
+    "managedArchitecture": "anycpu",
+    "cilRecovered": true,
+    "computeScoreOpcodes": {
+      "ldarg.0": 1,
+      "ldc.i4.3": 1,
+      "mul": 1,
+      "ldc.i4.7": 1,
+      "add": 1,
+      "ret": 1
+    },
+    "callEdgesRecovered": true,
+    "selectedCallEdges": [
+      {
+        "caller": "ReaLab.Program.Main",
+        "target": "ReaLab.ScoreEngine.ComputeScore"
+      },
+      {
+        "caller": "ReaLab.Program.Main",
+        "target": "ReaLab.ScoreEngine.ChooseMessage"
+      },
+      {
+        "caller": "ReaLab.Program.Main",
+        "target": "System.String.Format"
+      },
+      {
+        "caller": "ReaLab.Program.Main",
+        "target": "System.Console.WriteLine"
+      }
+    ],
+    "userStrings": [
+      "analysis-pending",
+      "analysis-ready",
+      "REA_LAB_MARKER:{0}:{1}"
+    ],
+    "coverage": "complete",
+    "targetExecuted": false,
+    "qualityScore": "9/9",
+    "errors": 0
+  },
+  "comparison": {
+    "nameAndMarkerDetectionChange": "0 (both conditions found 2/2 types, 3/3 methods, and the marker)",
+    "qualityScoreChange": "+3 (6/9 to 9/9)",
+    "addedCapabilities": [
+      "assembly identity",
+      "CIL opcode structure",
+      "static call edges"
+    ],
+    "timingComparable": false,
+    "timingNote": "The baseline byte scan and REA metadata/CIL analysis perform different work."
+  },
+  "provenance": {
+    "reaVersion": "6.7.0",
+    "reaTag": "rea-agents-6.7.0",
+    "reaCommit": "27dc42d10249f0410904a75c0997842eb03b931c",
+    "npmIntegrity": "sha512-yhIx2ioJYYT1C/tONfYeitC6LhnKmCh+ZwRUOgYuhSc733lGhkkt73zhug9WmLgxoMdKuqIYGCoBfD4fXkOhFw==",
+    "nodeVersion": "24.22.1",
+    "nodeArchiveSha256": "d2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5",
+    "dotnetSdk": "5.0.408"
+  }
+}
