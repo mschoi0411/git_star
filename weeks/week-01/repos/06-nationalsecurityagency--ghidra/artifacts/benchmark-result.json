@@ -1,0 +1,41 @@
+{
+  "fixture": {
+    "source": "project/lab_sample.c",
+    "executableBytes": 123904,
+    "executableSha256": "0e5bb415a5d05462cdbb3096bf4f43d01dde50e90f6ab990b3ba31eeb9a5de22",
+    "observedOutput": "GHIDRA_LAB_MARKER:analysis-ready:22",
+    "exitCode": 0
+  },
+  "baseline": {
+    "analyzer": "authored-byte-scan-baseline",
+    "elapsedMs": 6.238,
+    "expectedFunctionsDetected": "2/2",
+    "expectedMarkerDetected": true,
+    "highLevelDecompilation": false
+  },
+  "treatment": {
+    "analyzer": "ghidra-12.2-headless",
+    "wallElapsedMs": 120523.796,
+    "recoveredFunctionCount": 438,
+    "expectedFunctionsDetected": "2/2",
+    "expectedMarkerDetected": true,
+    "highLevelDecompilation": true,
+    "semanticExpressionRecovered": true,
+    "decompiledFunction": "int compute_score(int param_1)\r\n\r\n{\r\n                    /* 0x1000  2  compute_score */\r\n  return param_1 * 3 + 7;\r\n}"
+  },
+  "comparison": {
+    "functionNameDetectionChange": "0 (2/2 in both)",
+    "markerDetectionChange": "0 (1/1 in both)",
+    "addedCapability": "high-level function decompilation",
+    "timingComparable": false,
+    "timingNote": "The baseline byte scan and full Ghidra analysis perform different work."
+  },
+  "provenance": {
+    "ghidraVersion": "12.2",
+    "ghidraTag": "Ghidra_12.2_build",
+    "ghidraCommit": "8ca9077040cc43cd790babcfccf19475622a3e9a",
+    "ghidraReleaseSha256": "2c2cd776db3c1f6a097ba418922378ac3649cadd5e844a6f5f088ae628a7be67",
+    "jdk": "Eclipse Temurin 25.0.4.1+1",
+    "jdkArchiveSha256": "00c847d804f4a78e9f04f2683faf14fed898535b177b7fc704486cb0284e9283"
+  }
+}
