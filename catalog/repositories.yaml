@@ -1,0 +1,124 @@
+schema_version: 1
+stack_definition: cumulative_weekly_appearances
+stack_rules:
+  same_week_duplicates_count_once: true
+  reappearance_increments_stack: true
+  repeated_repositories_are_not_retested: true
+
+weeks:
+  - id: week-01
+    source: weeks/week-01/source.md
+    period_start: 2026-10-10
+    period_end: 2026-10-17
+    repositories: 10
+
+repositories:
+  - id: github.com/morluto/rea
+    url: https://github.com/morluto/rea
+    summary: target을 실행하지 않는 .NET metadata·CIL·call-edge 정적 분석
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_isolated_execution
+    result: weeks/week-01/repos/01-morluto--rea/README.md
+
+  - id: github.com/storytold/artcraft
+    url: https://github.com/storytold/artcraft
+    summary: cloud provider·계정 경계로 실행을 보류한 AI 시각 창작 desktop app
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: remote_review_execution_deferred
+    result: weeks/week-01/repos/02-storytold--artcraft/README.md
+
+  - id: github.com/boykopovar/anyps5
+    url: https://github.com/boykopovar/AnyPS5
+    summary: native 실행·입력 binary 수정 경계로 실행하지 않은 PS5 relinker
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: remote_review_execution_not_run
+    result: weeks/week-01/repos/03-boykopovar--anyps5/README.md
+
+  - id: github.com/mattpocock/skills
+    url: https://github.com/mattpocock/skills
+    summary: 코딩 에이전트 작업 지침 모음
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: remote_review_only
+    result: weeks/week-01/repos/04-mattpocock--skills/README.md
+
+  - id: github.com/cathrynlavery/diagram-design
+    url: https://github.com/cathrynlavery/diagram-design
+    summary: 편집 디자인 스타일 다이어그램 스킬
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_limited_execution
+    result: weeks/week-01/repos/05-cathrynlavery--diagram-design/README.md
+
+  - id: github.com/nationalsecurityagency/ghidra
+    url: https://github.com/NationalSecurityAgency/ghidra
+    summary: headless 정적 분석과 PDB 없는 함수 의미 복원
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_isolated_execution
+    result: weeks/week-01/repos/06-nationalsecurityagency--ghidra/README.md
+
+  - id: github.com/heygen-com/hyperframes
+    url: https://github.com/heygen-com/hyperframes
+    summary: HTML·CSS 기반 재현 가능한 영상 렌더링
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_isolated_execution
+    result: weeks/week-01/repos/07-heygen-com--hyperframes/README.md
+
+  - id: github.com/mksglu/context-mode
+    url: https://github.com/mksglu/context-mode
+    summary: 에이전트 도구 출력·컨텍스트 관리
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_limited_execution
+    result: weeks/week-01/repos/08-mksglu--context-mode/README.md
+
+  - id: github.com/earthtojake/text-to-cad
+    url: https://github.com/earthtojake/text-to-cad
+    summary: authored Python model의 STEP·STL 생성과 geometry 검증
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_isolated_execution
+    result: weeks/week-01/repos/09-earthtojake--text-to-cad/README.md
+
+  - id: github.com/anthropics/claude-plugins-official
+    url: https://github.com/anthropics/claude-plugins-official
+    summary: Claude 플러그인 디렉터리와 prompt-only 코드 단순화 지침
+    stack: 1
+    first_seen: week-01
+    last_seen: week-01
+    weeks: [week-01]
+    status: completed
+    security_status: reviewed_and_limited_execution
+    result: weeks/week-01/repos/10-anthropics--claude-plugins-official/README.md
