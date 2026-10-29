@@ -1,0 +1,71 @@
+{
+  "fixture": {
+    "prompt": "project/design-prompt.txt",
+    "model": "project/mounting_plate.py"
+  },
+  "baseline": {
+    "analyzer": "authored-text-requirement-baseline",
+    "elapsedMs": 3.548,
+    "requirementsExtracted": "6/6",
+    "stepGenerated": false,
+    "stlGenerated": false,
+    "geometryVerified": false,
+    "qualityScore": "6/10",
+    "errors": 0
+  },
+  "treatment": {
+    "analyzer": "cadgen-0.7.26-authored-model",
+    "elapsedMs": 46446.094,
+    "requirementsExtracted": "6/6",
+    "stepGenerated": true,
+    "stlGenerated": true,
+    "boundingBoxMm": [
+      40,
+      30,
+      4
+    ],
+    "boundingBoxVerified": true,
+    "volumeMm3": 4686.902664,
+    "expectedVolumeMm3": 4686.902664,
+    "volumeAndTopologyVerified": true,
+    "solidCount": 1,
+    "stlTriangleCount": 796,
+    "qualityScore": "10/10",
+    "telemetryEnabled": false,
+    "updateCheckEnabled": false,
+    "viewerOrMcpStarted": false,
+    "errors": 0
+  },
+  "artifacts": {
+    "step": {
+      "name": "mounting_plate.step",
+      "bytes": 31419,
+      "sha256": "a2969b754d9227dda141da159855ac5dfa04e4fbc229fa886009ded2e3e58ed7"
+    },
+    "stl": {
+      "name": "mounting_plate.stl",
+      "bytes": 39884,
+      "sha256": "f6d2fe71572131caf82b8e55ee8065a3542ec795b74686536a7dcfc888efd9c3"
+    }
+  },
+  "comparison": {
+    "requirementExtractionChange": "0 (6/6 in both)",
+    "qualityScoreChange": "+4 (6/10 to 10/10)",
+    "addedCapabilities": [
+      "STEP export",
+      "STL export",
+      "bounding-box validation",
+      "volume/topology validation"
+    ],
+    "timingComparable": false,
+    "timingNote": "The baseline parses text while Treatment loads a native geometry kernel and exports two CAD formats."
+  },
+  "provenance": {
+    "repository": "https://github.com/earthtojake/text-to-cad",
+    "version": "0.7.26",
+    "tag": "v0.7.26",
+    "commit": "2f793659fb7bab537e2f00836e06448fc4087cb2",
+    "cadgenWheelSha256": "112b8b3a385127b88909255f9d50fd6ed353d087ffae5906de800836da894b48",
+    "python": "3.12"
+  }
+}
