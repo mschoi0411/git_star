@@ -1,0 +1,13 @@
+_sources/
+_tooling/
+.playwright-mcp/
+.sisyphus/
+.hyperframes/
+.env
+.env.*
+node_modules/
+coverage/
+__pycache__/
+*.pyc
+*.obj
+*.pdb
