@@ -1,0 +1,53 @@
+{
+  "source": {
+    "repository": "https://github.com/mksglu/context-mode",
+    "commit": "90af14e34bf35120c3310f7a75f54fa99d2cabba",
+    "version": "1.0.169",
+    "component": "src/executor.ts PolyglotExecutor.executeFile"
+  },
+  "environment": {
+    "bun": "1.3.14",
+    "platform": "win32",
+    "dependencyInstallPerformed": false
+  },
+  "experiment": {
+    "records": 1000,
+    "rawBytes": 194381,
+    "returnedBytes": 119,
+    "reductionPercent": 99.94,
+    "estimatedRawTokens": 48596,
+    "estimatedReturnedTokens": 30,
+    "elapsedMs": 801.43,
+    "fidelityChecksPassed": 5,
+    "fidelityChecksTotal": 5,
+    "checks": {
+      "records": true,
+      "errors": true,
+      "statusCounts": true,
+      "averageLatencyMs": true,
+      "uniqueRoutes": true
+    },
+    "expected": {
+      "records": 1000,
+      "errors": 100,
+      "statusCounts": {
+        "200": 900,
+        "404": 50,
+        "500": 50
+      },
+      "averageLatencyMs": 496.62,
+      "uniqueRoutes": 25
+    },
+    "actual": {
+      "records": 1000,
+      "errors": 100,
+      "statusCounts": {
+        "200": 900,
+        "404": 50,
+        "500": 50
+      },
+      "averageLatencyMs": 496.62,
+      "uniqueRoutes": 25
+    }
+  }
+}
