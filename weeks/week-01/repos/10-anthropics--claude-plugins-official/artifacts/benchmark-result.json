@@ -1,0 +1,61 @@
+{
+  "experiment": "code-simplifier-static-application",
+  "inputCases": 64,
+  "behavior": {
+    "matchingCases": 64,
+    "mismatches": 0,
+    "outputs": [
+      "blocked",
+      "ready",
+      "review"
+    ]
+  },
+  "source": {
+    "baseline": {
+      "utf8Bytes": 905,
+      "nonEmptyLines": 34,
+      "decisionTokens": 7,
+      "maxBraceDepth": 5
+    },
+    "treatment": {
+      "utf8Bytes": 322,
+      "nonEmptyLines": 8,
+      "decisionTokens": 4,
+      "maxBraceDepth": 2
+    },
+    "changes": {
+      "utf8BytesReductionPercent": 64.42,
+      "nonEmptyLinesReductionPercent": 76.47,
+      "decisionTokensRemoved": 3,
+      "braceDepthRemoved": 3
+    }
+  },
+  "runtime": {
+    "nodeVersion": "v22.11.0",
+    "rounds": 7,
+    "iterationsPerRound": 20000,
+    "callsPerRound": 1280000,
+    "baselineMilliseconds": [
+      13.518,
+      19.476,
+      21.364,
+      20.719,
+      17.332,
+      19.734,
+      17.752
+    ],
+    "treatmentMilliseconds": [
+      30.693,
+      21.351,
+      18.71,
+      17.731,
+      20.123,
+      18.668,
+      17.306
+    ],
+    "baselineMedianMilliseconds": 19.476,
+    "treatmentMedianMilliseconds": 18.71,
+    "medianChangePercent": -3.93,
+    "checksum": 8440000
+  }
+}
